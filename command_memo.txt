@@ -189,6 +189,8 @@ git log -L :git_deflate_bound:zlib.c    #see every change made to the function g
 # Rewriting History
 git commit --amend
 git add; git rm; git commit --amend
+git rebase -i HEAD~3        #Changing Multiple Commit interactively
+git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 
 
 
