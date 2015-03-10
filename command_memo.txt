@@ -1,0 +1,196 @@
+git config --list
+git config --global user.name "pomn"
+git config --global user.email pomn@example.com
+
+
+git clone url [rename]
+
+git init
+
+.gitignore
+# no .a files
+*.a
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+# only ignore the root TODO file, not subdir/TODO
+/TODO
+# ignore all files in the build/ directory
+build/
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+# ignore all .txt files in the doc/ directory
+doc/**/*.txt
+
+
+git add *.c
+git add README
+git status [-s]
+git diff [--staged]
+git diff --checked  #check whitespace
+git commit [-a] -m 'initial project version'
+git commit --amend
+
+# Unstaging a Staged File
+git reset HEAD README
+# Unmodifying a Modified File
+git checkout -- README
+
+# Remove file
+rm PROJECTS.md
+git rm [-f] PROJECTS.md     #If you modified the file and added it to the index already, you must force the removal with the -f option
+git rm --cached readme.txt  #keep the file in your working tree but remove it from your staging area
+git rm log/\*.
+
+# Rename file
+git mv file_from file_to
+
+# Log
+git log
+git log -p -2
+git log -U1 --word-diff
+git log --stat
+git log --pretty=oneline
+git log --abbrev-commit --pretty=oneline
+git log --oneline --decorate
+git log --pretty=format:"%h - %an, %ar : %s" --graph
+git log --since=2.weeks
+git log --pretty="%h - %s" --author=pomn --since="2015-03-09" --before="2015-03-14" --no-merges
+
+# Remote
+git remote add name url
+git remote -v
+git fetch origin
+git pull [origin] [master] [url]
+git push origin master
+git push origin featureLocal:featureRemote
+git remote show origin
+git remote rename oldname newname
+git remote rm name
+
+# Tag
+git tag
+git tag -l 'v1.4.2.*'
+git tag v1.4-lw                         #Lightweight Tags
+git tag -a v1.4 -m 'my version 1.4'     #Annotated Tags
+git tag -a v1.2 9fceb02
+git show v1.4
+git push origin v1.5
+git push origin --tags
+git checkout -b version2 v2.0.0
+git describe master
+
+# Branch
+git log --oneline --decorate --graph --all
+git branch -[v] [--merged] [--no-merged]
+git branch hotfix (git branch namespace/hotfix)
+git checkout hotfix
+git checkout -b hotfix
+git checkout master
+git merge hotfix
+git branch -d hotfix
+
+##Remote branch
+git branch -r
+git fetch origin
+git fetch teamone
+git push origin hotfix (git push origin hotfix:serverfix)
+git merge origin/serverfix
+git checkout -b serverfix origin/serverfix
+git branch -u origin/serverfix
+git push origin --delete serverfix
+
+$ Rebase
+git checkout experiment
+git rebase master
+git checkout master
+git merge experiment
+
+git rebase --onto master server client
+git rebase [basebranch] [topicbranch]
+git checkout master
+git merge server
+
+# Workflows
+git remote add myfork (url)
+git checkout -b featureB origin/master
+git commit
+git push myfork featureB
+git fetch origin
+git log origin/featureB ^featureB
+git checkout -b featureBv2 origin/master
+git merge --no-commit --squash featureB
+
+git checkout featureA
+git rebase origin/master
+git push -f myfork featureA
+
+git log contrib --not master
+git diff master
+git merge-base contrib master
+git diff 36c7db
+git diff master...contrib
+
+# Cherry-pick
+git cherry-pick e43a6fd3e94888d76779ad79fb568ed180e5fcdf
+
+# Revision
+##Short SHA-1
+git log --abbrev-commit --pretty=oneline
+git show 1c002d
+git show branch1
+git rev-parse branch1
+
+##RefLog Shortnames
+git reflog
+git show HEAD@{5}
+git show master@{yesterday}
+git log -g master
+
+##Ancestry References
+git log --pretty=format:'%h %s' --graph
+git show HEAD^                      #the parent of HEAD
+git show HEAD^2                     #the second parent of HEAD
+git show HEAD~                      #the first parent of HEAD
+git show HEAD~2  = git show HEAD^^  #the first parent of the first parent
+git show HEAD~3^2
+
+##Commit Ranges
+git log master..experiment          #all commits reachable by experiment that aren’t reachable by master
+git log origin/master..[HEAD]       #show any commits in your current branch that aren’t in the master branch on your origin remote
+git log refA..refB = git log ^refA refB = git log refB --not refA
+git log refA refB ^refC = git log refA refB --not refC
+git log [--left-right] master...experiment  #what is in master or experiment but not any common references
+
+# Interactive Staging
+git add -i
+
+# Stashing
+git stash
+git stash --keep-index  #not stash anything that you’ve already staged with the git add command
+git stash -u            #stash the untracked files as well as the tracked ones. By default, git stash will only store files that are already in the index
+git stash --patch       #interactively
+
+git stash list
+git stash apply [--index] [stash@{2}]   #--index option to tell the command to try to reapply the staged changes
+git stash drop stash@{0}
+git stash pop                           #apply the stash and then immediately drop it from your stack.
+git stash branch branch1                #Creating a Branch from a Stash
+
+git clean
+git clean -d -n     #dry run
+git clean -f -d
+git clean -n -d -x
+
+# Searching
+git grep -n [--count] [--break --heading] helloworld [--and] [version]
+git log -Shelloworld --oneline          #the commits that either added or removed that string with the -S option
+git log -L :git_deflate_bound:zlib.c    #see every change made to the function git_deflate_bound in the zlib.c file
+
+# Rewriting History
+git commit --amend
+git add; git rm; git commit --amend
+
+
+
+
+
