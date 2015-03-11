@@ -192,6 +192,44 @@ git add; git rm; git commit --amend
 git rebase -i HEAD~3        #Changing Multiple Commit interactively
 git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
 
+# Reset Demystified
+git cat-file -p HEAD
+git ls-tree -r HEAD
+git ls-files -s
+
+##Move the branch HEAD points to (stop here if --soft)
+##Make the Index look like HEAD (stop here unless --hard)
+##Make the Working Directory look like the Index
+git reset --soft HEAD~      #move the branch back, without changing the Index or Working Directory
+git reset (--mixed) HEAD~   #still undid your last commit, but also unstaged everything
+git reset --hard HEAD~      #also verwrites files in the Working Directory
+
+##Reset With a Path
+##1 Move the branch HEAD points to (skipped)
+##2 Make the Index look like HEAD (stop here)
+git reset file.txt          #just copies file.txt from HEAD to the Index. opposite "git add file.txt"
+git reset eb43bf file.txt
+
+##Squashing
+git reset --soft HEAD~2
+git commit
+
+# checkout
+git checkout [branch]           #pretty similar to "git reset --hard [branch]"
+git checkout [branch] file.txt  #git reset --hard [branch] file.txt
+
+                        HEAD    Index   Workdir WDSafe?
+Commit Level
+reset --soft [commit]   REF     NO      NO      YES
+reset [commit]          REF     YES     NO      YES
+reset --hard [commit]   REF     YES     YES     NO
+checkout [commit]       HEAD    YES     YES     YES
+File Level
+reset (commit) [file]   NO      YES     NO      YES
+checkout (commit) [file]NO      YES     YES     NO
+
+
+
 
 
 
