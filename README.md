@@ -12,13 +12,13 @@ http://git-scm.com/book/zh/v1
 4. use "git --version" and "which git" to confirm
 
 # Tips
-* Auto-Completion
+##### Auto-Completion
 
 Copy <a href="https://github.com/pomn/git/blob/master/contrib/completion/git-completion.bash">git-completion.bash</a>  to your home directory, and add this to your .bash_profile file:
 
     source ~/git-completion.bash
 
-* Alias
+##### Alias
 
 Edit ~/.gitconfig
 
@@ -34,13 +34,13 @@ Edit ~/.gitconfig
         last = log -1 HEAD
         logg = log --pretty=oneline --graph
     
-* Recover a file from history
+##### Recover a file from history
 
 
     git checkout HASHID fileName 
     git commit -m "revert a file modification"
 
-* Whitespace
+##### Whitespace
 Windows uses both a carriage-return character and a linefeed character (CRLF) for newlines in its files, whereas Mac and Linux systems use only the linefeed character (LF).
 
 If you’re on a Windows machine, set it to true – this converts LF endings into CRLF when you check out code:
