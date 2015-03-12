@@ -228,6 +228,17 @@ File Level
 reset (commit) [file]   NO      YES     NO      YES
 checkout (commit) [file]NO      YES     YES     NO
 
+# Merge
+git merge --abort
+git merge -Xignore-space-change whitespace
+
+git checkout --conflict=diff3 hello.rb
+git config --global merge.conflictstyle diff3
+git log --oneline --left-right HEAD...MERGE_HEAD
+git log --oneline --left-right --merge
+
+git revert -m 1 HEAD        #The -m 1 flag indicates which parent is the “mainline” and should be kept
+git revert ^M
 
 
 
