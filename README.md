@@ -37,8 +37,23 @@ Edit ~/.gitconfig
 * Recover a file from history
 
 
-        git checkout HASHID fileName 
-        git commit -m "revert a file modification"
+    git checkout HASHID fileName 
+    git commit -m "revert a file modification"
+
+* Whitespace
+Windows uses both a carriage-return character and a linefeed character (CRLF) for newlines in its files, whereas Mac and Linux systems use only the linefeed character (LF).
+
+If you’re on a Windows machine, set it to true – this converts LF endings into CRLF when you check out code:
+
+    git config --global core.autocrlf true
+
+If you’re on a Linux or Mac system, you can tell Git to convert CRLF to LF on commit but not the other way around by setting core.autocrlf to input:
+
+    git config --global core.autocrlf input
+
+If you’re a Windows programmer doing a Windows-only project, then you can turn off this functionality:
+
+    git config --global core.autocrlf false
 
 
 # Refs
