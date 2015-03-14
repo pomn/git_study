@@ -60,3 +60,5 @@ If you’re a Windows programmer doing a Windows-only project, then you can turn
 <a href="http://www.bootcss.com/p/git-guide/">git - 简易指南</a>
 
 <a href="http://blog.devtang.com/blog/2012/02/03/talk-about-svn-and-git/">Git的使用感受</a>
+
+<a href="https://help.github.com/articles/github-glossary/">GitHub Glossary</a>
